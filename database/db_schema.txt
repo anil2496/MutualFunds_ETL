@@ -1,1 +1,37 @@
 
+
+NAV_hISTORY TABLE
+
+code date nav
+
+partitioned by date
+
+
+
+
+######################################################
+
+SCHEME_INFO
+
+scheme_code    scheme_name           fund_house               scheme_type         scheme_start_date         nav
+119551       Aditya Birla Sun\      Aditya Birla Sun         Open Ended Schemes   02-01-2013                103.00590
+             Life Banking & PSU\    Life Mutual Funds
+              Debt Fund  -\
+               DIRECT - IDCW
+
+
+#####################################################
+
+FUND_TRAILING_RETURNS
+
+scheme_code 1_year_returns 3_year_returns 5_year_returns  10_year_returns
+
+FUND_CALENDAR_RETURN_YEARS
+
+
+scheme_code 2020 2021 2022
+
+
+
+
+
