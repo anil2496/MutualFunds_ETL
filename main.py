@@ -1,5 +1,4 @@
 
-
 import os
 import requests
 import httpx
@@ -20,7 +19,7 @@ class Mftool():
 
     def __init__(self):
         self._session = requests.session()
-        self._filepath = str(os.path.dirname(os.path.abspath(__file__))) + '/const.json'
+        self._filepath = str(os.path.dirname(os.path.abspath(__file__))) + '/constant.json'
         self._const = self.init_const()
         # URL list
         self._get_quote_url = self._const['get_quote_url']
@@ -153,6 +152,7 @@ class Mftool():
         if self.is_valid_code(code):
             scheme_info = {}
             url = self._get_scheme_url + code
+            print(url)
             response = self._session.get(url).json()
             scheme_data = response['meta']
             scheme_info['fund_house'] = scheme_data['fund_house']
@@ -311,6 +311,10 @@ class Mftool():
             scheme_performance_url = self._get_open_ended_equity_scheme_url.replace('CAT',
                                                                                     self._open_ended_equity_category[
                                                                                         key])
+
+
+            #scheme_performance_url = scheme_performance_url + "nav-date=" + #
+            print(scheme_performance_url)
             scheme_performance[key] = self.get_daily_scheme_performance(scheme_performance_url)
         return self.render_response(scheme_performance, as_json)
 
@@ -375,6 +379,7 @@ class Mftool():
             url = performance_url + '&nav-date=' + self.get_friday()
         else:
             url = performance_url + '&nav-date=' + self.get_today()
+        print(url)
         # html = requests.get(url,headers=self._user_agent)
         html = httpx.get(url, headers=self._user_agent, timeout=25)
         soup = BeautifulSoup(html.text, 'html.parser')
@@ -516,3 +521,38 @@ class Mftool():
 
 
 
+mf = Mftool()
+#print(mf.get_scheme_codes())
+
+#print(mf.is_valid_code('119551'))
+
+
+#print(mf.is_code('0P0001I2M7'))
+
+#print(date.today().strftime("%a"))
+
+#print(mf.get_friday())
+
+#print(mf.get_scheme_quote('119551'))
+
+#print(mf.get_scheme_details('119551'))
+
+#print(mf.get_scheme_historical_nav(119551))
+
+
+#print(mf.calculate_balance_units_value(119551, 100))
+
+
+#print(mf.calculate_returns(119551, 125, 1000, 12))
+
+#print(mf.get_scheme_historical_nav_year(119551, 2022))
+
+print(mf.get_scheme_historical_nav_for_dates(119551, '01-07-2022', '18-07-2022'))
+
+
+#print(mf.get_open_ended_equity_scheme_performance())
+
+#print(mf.get_all_amc_profiles())
+
+#print(mf.get_average_aum('July - September 2020'))
+#print(mf.get_scheme_info('119551'))
